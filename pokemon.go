@@ -27,3 +27,28 @@ func (c *Client) GetPokemons() ([]Pokemon, error) {
 	return pokemons, nil
 }
 
+// CreatePokemon - Create new pokemon
+func (c *Client) CreatePokemon(pokemon_in Pokemon) (*Pokemon, error) {
+	rb, err := json.Marshal(pokemon_in)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", fmt.Sprintf("%s/pokemons", c.HostURL), strings.NewReader(string(rb)))
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := c.doRequest(req)
+	if err != nil {
+		return nil, err
+	}
+
+	pokemon_out := Pokemon{}
+	err = json.Unmarshal(body, &pokemon_out)
+	if err != nil {
+		return nil, err
+	}
+
+	return &pokemon_out, nil
+}
