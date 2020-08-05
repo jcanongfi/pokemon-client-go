@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+        "strings"
 )
 
 // GetPokemons - Returns list of pokemons (no auth required)
