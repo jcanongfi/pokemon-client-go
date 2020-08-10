@@ -3,6 +3,7 @@ package pokemon
 import (
 	"encoding/json"
 	"fmt"
+        "log"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -34,6 +35,8 @@ type AuthResponse struct {
 
 // NewClient -
 func NewClient(host, username, password *string) (*Client, error) {
+        log.Printf("[TRACE] XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX client")
+        fmt.Printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX client")
 	c := Client{
 		HTTPClient: &http.Client{Timeout: 10 * time.Second},
 		HostURL: HostURL,
