@@ -36,7 +36,6 @@ type AuthResponse struct {
 func NewClient(host, username, password *string) (*Client, error) {
 	c := Client{
 		HTTPClient: &http.Client{Timeout: 10 * time.Second},
-		// Default Hashicups URL
 		HostURL: HostURL,
 	}
 
