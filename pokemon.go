@@ -9,7 +9,7 @@ import (
 
 // GetPokemons - Returns list of pokemons (no auth required)
 func (c *Client) GetPokemons() ([]Pokemon, error) {
-	req, err := http.NewRequest("GET", fmt.Sprintf("%s/pokemons", c.HostURL), nil)
+	req, err := http.NewRequest("GET", fmt.Sprintf("%s/pokemon", c.HostURL), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ func (c *Client) CreatePokemon(pokemon_in Pokemon) (*Pokemon, error) {
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", fmt.Sprintf("%s/pokemons", c.HostURL), strings.NewReader(string(rb)))
+	req, err := http.NewRequest("POST", fmt.Sprintf("%s/pokemon", c.HostURL), strings.NewReader(string(rb)))
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ func (c *Client) CreatePokemon(pokemon_in Pokemon) (*Pokemon, error) {
 
 // GetPokemon - Returns a specifc pokemon
 func (c *Client) GetPokemon(pokemonID string) (*Pokemon, error) {
-	req, err := http.NewRequest("GET", fmt.Sprintf("%s/pokemons/%s", c.HostURL, pokemonID), nil)
+	req, err := http.NewRequest("GET", fmt.Sprintf("%s/pokemon/%s", c.HostURL, pokemonID), nil)
 	if err != nil {
 		return nil, err
 	}
