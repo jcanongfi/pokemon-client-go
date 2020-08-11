@@ -77,3 +77,28 @@ func (c *Client) GetPokemon(pokemonID string) (*Pokemon, error) {
 	return &pokemon, nil
 }
 
+// UpdatePokemon - Updates an pokemon
+func (c *Client) UpdatePokemon(pokemonID string, poke Pokemon) (*Pokemon, error) {
+	rb, err := json.Marshal(poke)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", fmt.Sprintf("%s/orders/%s", c.HostURL, pokemonID), strings.NewReader(string(rb)))
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := c.doRequest(req)
+	if err != nil {
+		return nil, err
+	}
+
+	order := Pokemon{}
+	err = json.Unmarshal(body, &order)
+	if err != nil {
+		return nil, err
+	}
+
+	return &order, nil
+}
