@@ -84,7 +84,7 @@ func (c *Client) UpdatePokemon(pokemonID string, poke Pokemon) (*Pokemon, error)
 		return nil, err
 	}
 
-	req, err := http.NewRequest("PUT", fmt.Sprintf("%s/orders/%s", c.HostURL, pokemonID), strings.NewReader(string(rb)))
+	req, err := http.NewRequest("PUT", fmt.Sprintf("%s/pokemon/%s", c.HostURL, pokemonID), strings.NewReader(string(rb)))
 	if err != nil {
 		return nil, err
 	}
@@ -94,11 +94,31 @@ func (c *Client) UpdatePokemon(pokemonID string, poke Pokemon) (*Pokemon, error)
 		return nil, err
 	}
 
-	order := Pokemon{}
-	err = json.Unmarshal(body, &order)
+	poke := Pokemon{}
+	err = json.Unmarshal(body, &poke)
 	if err != nil {
 		return nil, err
 	}
 
-	return &order, nil
+	return &poke, nil
 }
+
+// DeletePokemon - Deletes an pokemon
+func (c *Client) DeletePokemon(pokemonID string) error {
+	req, err := http.NewRequest("DELETE", fmt.Sprintf("%s/pokemon/%s", c.HostURL, pokemonID), nil)
+	if err != nil {
+		return err
+	}
+
+	body, err := c.doRequest(req)
+	if err != nil {
+		return err
+	}
+
+	if string(body) != "result: True" {
+		return errors.New(string(body))
+	}
+
+	return nil
+}
+
