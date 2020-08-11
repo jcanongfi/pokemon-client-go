@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
         "strings"
+        "errors"
 )
 
 // GetPokemons - Returns list of pokemons (no auth required)
@@ -94,13 +95,13 @@ func (c *Client) UpdatePokemon(pokemonID string, poke Pokemon) (*Pokemon, error)
 		return nil, err
 	}
 
-	poke := Pokemon{}
-	err = json.Unmarshal(body, &poke)
+	new_poke := Pokemon{}
+	err = json.Unmarshal(body, &new_poke)
 	if err != nil {
 		return nil, err
 	}
 
-	return &poke, nil
+	return &new_poke, nil
 }
 
 // DeletePokemon - Deletes an pokemon
