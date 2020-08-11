@@ -40,6 +40,8 @@ func (c *Client) CreatePokemon(pokemon_in Pokemon) (*Pokemon, error) {
 		return nil, err
 	}
 
+        req.Header.Add("Content-Type", "application/json")
+
 	body, err := c.doRequest(req)
 	if err != nil {
 		return nil, err
