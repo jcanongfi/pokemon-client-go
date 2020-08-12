@@ -64,7 +64,6 @@ func (c *Client) GetPokemon(pokemonID string) (*Pokemon, error) {
 		return nil, err
 	}
 
-        req.Header.Add("Content-Type", "application/json")
 	body, err := c.doRequest(req)
 	if err != nil {
 		return nil, err
@@ -86,6 +85,7 @@ func (c *Client) UpdatePokemon(pokemonID string, poke Pokemon) (*Pokemon, error)
 		return nil, err
 	}
 
+        req.Header.Add("Content-Type", "application/json")
 	req, err := http.NewRequest("PUT", fmt.Sprintf("%s/pokemon/%s", c.HostURL, pokemonID), strings.NewReader(string(rb)))
 	if err != nil {
 		return nil, err
