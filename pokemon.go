@@ -64,6 +64,7 @@ func (c *Client) GetPokemon(pokemonID string) (*Pokemon, error) {
 		return nil, err
 	}
 
+        req.Header.Add("Content-Type", "application/json")
 	body, err := c.doRequest(req)
 	if err != nil {
 		return nil, err
