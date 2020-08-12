@@ -117,8 +117,7 @@ func (c *Client) DeletePokemon(pokemonID string) error {
 		return err
 	}
 
-//	if string(body) != "result: True" {
-	if string(body).Contains("result: True") {
+	if strings.Contains(string(body),"result: True") {
 		return errors.New(string(body))
 	}
 
